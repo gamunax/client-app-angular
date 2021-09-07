@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
@@ -8,10 +9,14 @@ import { Client } from '../model/client.model';
   providedIn: 'root'
 })
 export class ClientService {
+  private URL_ENDPOINT = 'http://localhost:8080/api/clients';
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   getClients(): Observable<Client[]> {
-    return of(CLIENTS);
+    // return of(CLIENTS);
+    return this.http.get<Client[]>(this.URL_ENDPOINT);
   }
 }
